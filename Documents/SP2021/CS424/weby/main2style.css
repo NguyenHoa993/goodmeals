@@ -303,6 +303,7 @@ th {
 }
 
 #calendarContent th {
+    height: 25px;
     font-weight: bold;
     background-color: #E6E6E6;
     border: none;
