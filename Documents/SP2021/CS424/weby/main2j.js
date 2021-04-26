@@ -594,22 +594,33 @@ function disableDaysBeforeToday(){
     // get the Date object
     var date = new Date();
     
-    // disables all the days in the month before the current month
+    // get the current year and month
     var realMonth = date.getMonth() + 1;
-    console.log(thisMonth + "- " + realMonth);
-    if(thisMonth < realMonth){
-        for(var i = 0; i < days.length; i++){
+    var realYear = date.getFullYear();
+
+    function disableDays(days, end){
+        for(var i = 0; i < end; i++){
             days[i].disabled = true;
             days[i].style.outline = "none";
         }
     }
-    else if(thisMonth == realMonth){
-        // disable all the days before the current day of this month
-        for(var i = 0; i < thisDay - 1; i++){
-            days[i].disabled = true;
-            days[i].style.outline = "none";
+
+    // disables all the days in the month before the current month
+    if(thisYear == realYear){
+        if(thisMonth < realMonth){
+            disableDays(days, days.length);
+        }
+        else if(thisMonth == realMonth){
+            // disable all the days before the current day of this month
+            disableDays(days, thisDay - 1);
         }
     }
+    else if(thisYear < realYear){
+        // if the year is smaller than current year,
+        // disable all days
+        disableDays(days, days.length);
+    }
+    
 }
 
 // go to next month
