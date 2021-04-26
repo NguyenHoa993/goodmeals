@@ -25,7 +25,6 @@ function setUserInfo(){
     userInfo.fitnessGoal = document.getElementById('fitnessGoal').value;
     userInfo.vegan = document.getElementById("veganCheckbox").checked;
     userInfo.tips = document.getElementById("tipsCheckbox").checked;
-
     // save user data
     localStorage.setItem("email", userInfo.email);
     localStorage.setItem("username", userInfo.username);

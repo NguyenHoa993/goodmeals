@@ -837,10 +837,43 @@
             var span = document.getElementsByClassName("close")[0];
             panel_for_editing_button.onclick = function() {
                 panel_for_editing.style.display = "block";
+
+                // put the previous infomation of the users to the textboxes
+                putPreviousInformation();
+
+                // add the event handler the the textboxes to highlight all
+                // the text when the users click on them
+                document.getElementById("email").onclick = highlightText;
+                document.getElementById("username").onclick = highlightText;
+                document.getElementById("password").onclick = highlightText;
+                document.getElementById("age").onclick = highlightText;
+                document.getElementById("height").onclick = highlightText;
+                document.getElementById("weight").onclick = highlightText;
+                document.getElementById("fitnessGoal").onclick = highlightText;
             }
             span.onclick = function() {
                 panel_for_editing.style.display = "none";   
             }
+
+            // function to put information of the users to the edit textboxes
+            function putPreviousInformation(){
+                document.getElementById("email").value = localStorage.getItem("email");
+                document.getElementById("username").value = localStorage.getItem("username");
+                document.getElementById("password").value = localStorage.getItem("password");
+                document.getElementById("age").value = localStorage.getItem("age");
+                document.getElementById("height").value = localStorage.getItem("height");
+                document.getElementById("weight").value = localStorage.getItem("weight");
+                document.getElementById("fitnessGoal").value = localStorage.getItem("finessGoal");
+                document.getElementById("veganCheckbox").checked = localStorage.getItem("vegan") == "true" ? true : false;
+                document.getElementById("tipsCheckbox").checked = localStorage.getItem("tips") == "true" ? true : false;
+            }
+
+            // highlight the text in textbox when the users click on it
+            function highlightText(){
+                this.focus();
+                this.select();
+            }
+
             window.onclick = function(event) {
                 if (event.target == panel_for_editing) {
                     panel_for_editing.style.display = "none";
