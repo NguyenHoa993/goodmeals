@@ -1,11 +1,16 @@
 var food ; 
-var currSelectedDay = document.getElementsByClassName("start")[0];
+
 
 var store_list ={"li1":[],"li2":[],"li3":[]}; 
 arrDay=[] // collection of Days object  
 var selectDay = null; 
 var selectIndex = null ; 
 var cur_li_id  = null; 
+
+// calendar date variables
+var currSelectedDay = document.getElementsByClassName("start")[0];
+var thisYear, thisMonth, thisDay;
+
 
 function get_unique(id){
     var kui = id.split('_');
@@ -266,9 +271,9 @@ function updateAMeal(li_id){
 
 
 
-var selectDay = new Days("4-3-2021"); 
-arrDay.push(selectDay); 
-selectIndex =0 ;
+// var selectDay = new Days("4-3-2021"); 
+// arrDay.push(selectDay); 
+// selectIndex =0 ;
 
 function lookUpIndex(key){ 
     for(var i=0; i< arrDay.length;i++){
@@ -469,19 +474,40 @@ console.log("start game");
 
 // create transparent outline for all days
 
-var c =  document.querySelector(".daysList .start");
-
-
-c.style.outline = "2px solid red";
-
 var userInfo; // store user information received from registration
 var dailyIntake;
 window.onload = function(){
+    // create calendar
+    var elem = document.querySelector("#calendarContent");
+
+    // get the current month and year
+    var today = new Date();
+    thisMonth = today.getMonth() + 1;
+    thisYear = today.getFullYear();
+    thisDay = today.getDate();
+
+    // create calendar with the 
+    createCalendar(elem, thisYear, thisMonth);
+
     // Add listeners for the elements in the calendar
     addCalendarEventListener();
 
+    // select today
+    var str = "" + thisMonth + "-" + thisDay + "-" + thisYear;
+    selectDay = new Days(str); 
+    arrDay.push(selectDay); 
+    selectIndex = 0; 
+    $("#planDate").text(str);
+    // loop through all the days and highlight today
+    var days = document.getElementsByClassName("day");;
+    for(var i = 0; i < days.length; i++){
+        if(parseInt(days[i].innerHTML) == thisDay){
+            days[i].style.outline = "2px solid red";
+        }
+    }
+
     // get the user information from the local storage
-    userInfo = getUserInfomation();
+    userInfo = getUserInfomation()
     displayInformation(userInfo);
     console.log(userInfo);
 
@@ -489,6 +515,94 @@ window.onload = function(){
     dailyIntake = new DailyIntake();
     dailyIntake.calculate(userInfo);
     console.log(dailyIntake);
+
+    
+}
+
+
+// create the calendar
+function createCalendar(elem, year, month) {
+    // update the year and month
+    document.querySelector("#year").innerHTML = year.toString();
+    
+    document.querySelector("#month").innerHTML = (new MyDay()).numberToMonthName(month);
+
+    let mon = month - 1; // months in JS are 0..11, not 1..12
+    let d = new Date(year, mon);
+
+    let table = `<table id="calendarContent" style="border-collapse: collapse;">
+                <tr><th>MO</th><th>TU</th><th>WE</th><th>TH</th><th>FR</th><th>SA</th><th>SU</th></tr><tr>`;
+
+    // spaces for the first row
+    // from Monday till the first day of the month
+    // * * * 1  2  3  4
+    for (let i = 0; i < getDay(d); i++) {
+        table += '<td></td>';
+    }
+
+    // <td> with actual dates
+    while (d.getMonth() == mon) {
+        table += '<td><button class="day">' + d.getDate() + '</button></td>';
+
+        if (getDay(d) % 7 == 6) { // sunday, last day of week - newline
+            table += '</tr><tr>';
+        }
+
+        d.setDate(d.getDate() + 1);
+    }
+
+    // add spaces after last days of month for the last row
+    // 29 30 31 * * * *
+    if (getDay(d) != 0) {
+        for (let i = getDay(d); i < 7; i++) {
+            table += '<td></td>';
+        }
+    }
+
+    // close the table
+    table += '</tr></table>';
+
+    // create the elements of calendar
+    elem.innerHTML = table;
+
+    // add event listeners for newly created days
+    $("#calendarContent tr td button").on("click", onDayClick);
+    $("#calendarContent tr td button").on("mouseover", onDayHover);
+    $("#calendarContent tr td button").on("mouseout", onDayOut);
+}
+
+function getDay(date) { // get day number from 0 (monday) to 6 (sunday)
+  let day = date.getDay();
+  if (day == 0) day = 7; // make Sunday (0) the last day
+  return day - 1;
+}
+
+// go to next month
+function nextMonth(){
+    // update the month and year
+    if(thisMonth < 12)
+        thisMonth++;
+    else if(thisMonth == 12){
+        thisMonth = 1;
+        thisYear++;
+    }
+
+    // update the calendar
+    createCalendar(document.querySelector("#calendarContent"), thisYear, thisMonth);
+}
+
+// go to previous month
+function previousMonth(){
+    // update the month and year
+    if(thisMonth > 1)
+        thisMonth--;
+    else if(thisMonth == 1){
+        thisMonth = 12;
+        thisYear--;
+    }
+
+    // update the calendar
+    createCalendar(document.querySelector("#calendarContent"), thisYear, thisMonth);
 }
 
 //--LUKE NORRIS' CODE STARTS HERE
@@ -547,16 +661,16 @@ function displayInformation(inputInfo){
 // add event listeners to calendar
 function addCalendarEventListener(){
     // attach event listener for all days on calendar
-    
-    $(".daysList li button").on("click", onDayClick);
-    $(".daysList li button").on("mouseover", onDayHover);
-    $(".daysList li button").on("mouseout", onDayOut);
+    $(".prev").on('click', previousMonth);
+    $(".next").on('click', nextMonth);
+    $("#calendarContent tr td button").on("click", onDayClick);
+    $("#calendarContent tr td button").on("mouseover", onDayHover);
+    $("#calendarContent tr td button").on("mouseout", onDayOut);
 }
 
 
 function onDayClick(){
-    var date = new Date();
-    c.style.border = "none";
+    var date = new MyDay();
     // get the date
     date.day = parseInt(this.innerHTML);
     date.month = date.monthNameToNumber(document.querySelector("#month").innerHTML);
@@ -564,7 +678,7 @@ function onDayClick(){
     var unique_key = date.getDate();
 
     // set outline for selected day
-    $(".daysList li button").css({"outline":"2px solid transparent"});
+    $("#calendarContent tr td button").css({"outline":"2px solid transparent"});
     this.style.outlineColor = "red";
     
     triggerNewDay(unique_key)

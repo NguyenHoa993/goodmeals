@@ -289,6 +289,42 @@ text-decoration: none;
     width: 390px;
 }
 
+#calendarContent {
+    width: 200px;
+    height: 200px;
+    margin-left: 15px;
+    text-align: center;
+}
+
+#calendarContent td,
+th {
+    border: 1px solid black;
+    padding: 3px;
+}
+
+#calendarContent th {
+    font-weight: bold;
+    background-color: #E6E6E6;
+    border: none;
+    padding-left: 20px;
+}
+
+#calendarContent td {
+    border: none;
+    text-align: center;
+    padding-left: 15px;
+}
+
+#calendarContent button{
+    border:none;
+    background-color: transparent;
+}
+
+#calendarContent button:hover{
+    outline: 2px solid blue;
+}
+
+
 .weekdaysList {
     background-color: rgb(228, 225, 225);
 }
@@ -315,7 +351,7 @@ text-decoration: none;
 
 #calendarBlock button{
     text-align: center;
-    background-color: transparent;
+    background-color: white;
     border: transparent;
 }
 
@@ -355,7 +391,7 @@ text-decoration: none;
   }
 
 .dayStatus {
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 0px;
 }
 
@@ -418,14 +454,14 @@ text-decoration: none;
 #page_article .healthy_tab {
     margin-top: 4%;
 }
-table, th, td {
+#page_article table, th td {
 
     width:100%;
     height: 50%;
     border-collapse: separate;
     border-spacing: 15px;
   }
-  th, td {  
+  #page_article th, td {  
     border: 1px solid black;
     border-collapse: separate;
     border-spacing: 15px;

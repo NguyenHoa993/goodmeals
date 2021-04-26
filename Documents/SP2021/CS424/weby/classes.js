@@ -52,20 +52,27 @@ class Days{
 }
 
 // to easy save and retrieve the date
-class Date {
+class MyDay {
     constructor(){
         this.month = 1;
         this.day = 1;
         this.year = 2021;
+        this.months = ["january","february","march","april","may","june","july",
+                "august","september","october","november","december"];
     }
 
     // translate month's name to number
     monthNameToNumber(monthName){
-        var months = ["january","february","march","april","may","june","july",
-                "august","september","october","november","december"];
+        
         // return the index of the month in month list
-        return months.indexOf(monthName.toLowerCase()) + 1;
+        return this.months.indexOf(monthName.toLowerCase()) + 1;
     }
+
+    // translate the number to month name
+    numberToMonthName(number){
+        return this.months[number - 1];
+    }
+
 
     // get the string of format "month-day-year"
     getDate(){
