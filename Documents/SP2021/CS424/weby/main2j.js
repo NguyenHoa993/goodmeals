@@ -6,9 +6,11 @@ arrDay=[] // collection of Days object
 var selectDay = null; 
 var selectIndex = null ; 
 var cur_li_id  = null; 
+var plannedDays = [];
+var currPlannedDay = null;
 
 // calendar date variables
-var currSelectedDay = document.getElementsByClassName("start")[0];
+var currSelectedDay = null;
 var thisYear, thisMonth, thisDay;
 
 
@@ -248,6 +250,7 @@ function to_list(ev){
      
     // mark the day as planned
    currSelectedDay.style.backgroundColor = "aqua";
+   plannedDays.push(currPlannedDay);
 }
 
 function updateAMeal(li_id){
@@ -498,11 +501,13 @@ window.onload = function(){
     arrDay.push(selectDay); 
     selectIndex = 0; 
     $("#planDate").text(str);
+    currPlannedDay = str;
     // loop through all the days and highlight today
     var days = document.getElementsByClassName("day");;
     for(var i = 0; i < days.length; i++){
         if(parseInt(days[i].innerHTML) == thisDay){
             days[i].style.outline = "2px solid red";
+            currSelectedDay = days[i];
         }
     }
 
@@ -569,12 +574,42 @@ function createCalendar(elem, year, month) {
     $("#calendarContent tr td button").on("click", onDayClick);
     $("#calendarContent tr td button").on("mouseover", onDayHover);
     $("#calendarContent tr td button").on("mouseout", onDayOut);
+
+    // disable the days before today
+    disableDaysBeforeToday();
 }
 
+// get the date Monday or Tuesday or... Sunday
 function getDay(date) { // get day number from 0 (monday) to 6 (sunday)
   let day = date.getDay();
   if (day == 0) day = 7; // make Sunday (0) the last day
   return day - 1;
+}
+
+// disable the buttons of the days that are before today
+function disableDaysBeforeToday(){
+    // get all the buttons
+    var days = document.getElementsByClassName("day");
+
+    // get the Date object
+    var date = new Date();
+    
+    // disables all the days in the month before the current month
+    var realMonth = date.getMonth() + 1;
+    console.log(thisMonth + "- " + realMonth);
+    if(thisMonth < realMonth){
+        for(var i = 0; i < days.length; i++){
+            days[i].disabled = true;
+            days[i].style.outline = "none";
+        }
+    }
+    else if(thisMonth == realMonth){
+        // disable all the days before the current day of this month
+        for(var i = 0; i < thisDay - 1; i++){
+            days[i].disabled = true;
+            days[i].style.outline = "none";
+        }
+    }
 }
 
 // go to next month
@@ -589,6 +624,9 @@ function nextMonth(){
 
     // update the calendar
     createCalendar(document.querySelector("#calendarContent"), thisYear, thisMonth);
+
+    // highlight the planned days
+    highlightPlannedDays();
 }
 
 // go to previous month
@@ -603,6 +641,34 @@ function previousMonth(){
 
     // update the calendar
     createCalendar(document.querySelector("#calendarContent"), thisYear, thisMonth);
+
+    // highlight the planned days
+    highlightPlannedDays();
+}
+
+// change the color of the planned date if any
+function highlightPlannedDays(){
+    console.log("heer");
+    // loop through all the planned days
+    for(var i = 0; i < plannedDays.length; i++){
+        // get the date
+        var day = plannedDays[i].split("-");
+        // get the day, month, year
+        var mm = parseInt(day[0]);
+        var dd = parseInt(day[1]);
+        var yyyy = parseInt(day[2]);
+
+        var dayButtons = [];
+
+        // get all the days buttons
+        var days = document.getElementsByClassName("day");
+
+        // highlight the planned day
+        if(mm == thisMonth && yyyy == thisYear){
+            days[dd - 1].style.backgroundColor = "aqua";
+        }
+    }
+
 }
 
 //--LUKE NORRIS' CODE STARTS HERE
@@ -676,6 +742,7 @@ function onDayClick(){
     date.month = date.monthNameToNumber(document.querySelector("#month").innerHTML);
     date.year = parseInt(document.querySelector("#year").innerHTML);
     var unique_key = date.getDate();
+    currPlannedDay = unique_key;
 
     // set outline for selected day
     $("#calendarContent tr td button").css({"outline":"2px solid transparent"});

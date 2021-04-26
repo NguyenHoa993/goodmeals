@@ -34,7 +34,7 @@ class Meal {
 
 class Days{ 
     constructor(days){
-        this.key= days ;   // "month-day"
+        this.key = days ;   // "month-day"
         this.breakfast  = new Meal(); 
         this.lunch = new Meal()
         this.dinner = new Meal(); 
