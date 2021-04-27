@@ -40,11 +40,11 @@
 
         /* Modal Content */
         .edit-panel-content {
-            background-color: #fefefe;
+            background-color: rgb(236, 193, 112);
             margin: auto;
-            padding: 20px;
+            width: 33.5%;
+            padding: 0px;
             border: 1px solid #888;
-            width: 80%;
         }
 
         /* The Close Button */
@@ -139,7 +139,7 @@
           <h1 style = "text-align: center;background-color: rgb(236, 193, 112);">Good Meals</h1>
           <div style = "position: relative;">
           <img style = "border-radius: 50%; display: block;margin-left: auto; margin-right: auto;"
-          id = "ImageFromUser" src = "image_v1/PHOTO_PLACEHOLDER.jpg" width="70px" height="70px"></img>
+          id = "ImageFromUser" src = "image_v1/userIcon.png" width="70px" height="70px"></img>
           <button class = "topright" id = "EditButton">
             <img src = "image_v1/EDIT_ICON.jpg" style = "display: block; width: 25px; height: 25px;"></img>         
           </button>
@@ -150,58 +150,58 @@
               <span class="close">&times;</span>
 
                 <div id="register">
-                    <h3 style="text-align: center;">Edit Here</h3>
-                    <table id="registerTable">
-                        <tr>
-                            <td>Email</td>
-                            <td ><input type="text" id="email"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Username</td>
-                            <td ><input type="text" id="username"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Password</td>
-                            <td ><input type="password" id="password"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Age</td>
-                            <td ><input type="text" id="age"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Height</td>
-                            <td ><input type="text" id="height" placeholder="inches (in.)"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Weight</td>
-                            <td><input type="text"  id = weight placeholder="pounds (lbs)"></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Fitness Goal</td>
-                            <td><input type="text" id="fitnessGoal" placeholder="none/light/moderate/hard/very hard"></td>
-                            <td><button id="hintBtn" onclick="displayHint()">?</button></td>
-                        </tr>
+                        <h3 style="text-align: center;">Edit Here</h3>
+                        <table id="registerTable">
+                            <tr>
+                                <td>Email</td>
+                                <td ><input type="text" id="email"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Username</td>
+                                <td ><input type="text" id="username"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td>
+                                <td ><input type="password" id="password"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Age</td>
+                                <td ><input type="text" id="age"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Height</td>
+                                <td ><input type="text" id="height" placeholder="inches (in.)"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Weight</td>
+                                <td><input type="text"  id = weight placeholder="pounds (lbs)"></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Fitness Goal</td>
+                                <td><input type="text" id="fitnessGoal" placeholder="none/light/moderate/hard/very hard"></td>
+                                <td><button id="hintBtn" onclick="displayHint()">?</button></td>
+                            </tr>
+                            
+                        </table>
                         
-                    </table>
-                    
-                    <div id="registerCheckboxes">
-                        <input type="checkbox" id="veganCheckbox" value="false">
-                        <label>Vegan</label><br>
-                        <input type="checkbox" id="tipsCheckbox" value="false">
-                        <label>Receive healthy eating tips via emails</label><br>
-                    </div>
-                    
-                    <div style="text-align: center;">
-                        <button id="registerBtn" onclick="editInformation()">Confirm Edits</button>
-                    </div>
+                        <div id="registerCheckboxes">
+                            <input type="checkbox" id="veganCheckbox" value="false">
+                            <label>Vegan</label><br>
+                            <input type="checkbox" id="tipsCheckbox" value="false">
+                            <label>Receive healthy eating tips via emails</label><br>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button id="registerBtn" onclick="editInformation()">Confirm Edits</button>
+                        </div>
             
-                </div>
+                    </div>
 
                     <div id="fitnessHint">
                         <p>none: no exercise</p>
@@ -212,7 +212,7 @@
                     </div>  
 
                 </div>
-          
+          </div>
           </div>
           
             <div class="informationPanel">
