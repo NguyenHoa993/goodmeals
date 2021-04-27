@@ -265,6 +265,11 @@ function to_list(ev){
     // mark the day as planned
    currSelectedDay.style.backgroundColor = "aqua";
    plannedDays.push(currPlannedDay);
+   
+   
+    
+   sec_head.style.pointerEvents ="initial";
+  
 }
 
 function updateAMeal(li_id){
