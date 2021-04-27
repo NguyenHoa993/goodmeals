@@ -133,7 +133,7 @@
         }
     </style>
     
-    <section>
+    <section class ="sec_head">
       <div class = "center_user">
          
           <h1 style = "text-align: center;background-color: rgb(236, 193, 112);">Good Meals</h1>
@@ -354,6 +354,7 @@
     
     
                 <div content= "outer" id ="popup_option_list">
+                    <ul style="text-align:center;margin-right: 10%;"><p>Select a Meal List for  your <ins id="what_food" style="font-style: italic;"></ins> dish </p> </ul>
                     <div id ="1" class="hoverItem" onclick ="to_list(this)"><p>BREAKFAST</p></div>
                     <div id="2" class="hoverItem" onclick ="to_list(this)"><p>LUNCH</p></div>
                     <div id="3" class="hoverItem" onclick ="to_list(this)"><p>DINNER</p></div>
@@ -665,24 +666,31 @@
             <!-- *************END CALENDAR******************* -->
             <div class="plan_day"> 
                 <div class= "tri2">
-                <p >PROTEIN <ins id ="protein">0</ins> g</p>
-                <p  >SODIUM <ins id="sodium">0</ins> g</p>
-                </div>
-                <div class= "tri2"> 
-                <p >FAT <ins id="fat">0</ins> g</p>
-                <p >VITAMIN <ins id ="vitamin">0</ins> mg</p>
-                </div>
-                <p style="margin-left:3%;" >TOTAL CALORIES: <ins id="calo">0</ins>  </p>
-                <p style ="margin-left:3%; display:inline-block" > TOTAL ITEMs: <ins id="num_item">0</ins> </p>
+                    <p >PROTEIN <ins id ="protein">0</ins> / <ins class ="cap_protein">0</ins> g</p>
+                    <p  >SODIUM <ins id="sodium">0</ins> / <ins class ="cap_sodium">0</ins> g</p>
+                    </div>
+                    <div class= "tri2"> 
+                    <p >FAT <ins id="fat">0</ins> / <ins class ="cap_fat">0</ins> g</p>
+                    <p >VITAMIN <ins id ="vitamin">0</ins> / <ins class ="cap_vitamin">0</ins> mg</p>
+                    </div>
+                    <p style="margin-left:3%;" >TOTAL CALORIES: <ins id="calo">0</ins> / <ins class="cap_calo">0</ins> gcal</p>
+                    <p style ="margin-left:3%; display:inline-block" > TOTAL ITEMs: <ins id="num_item">0</ins> </p>
                 
             </div>
+
+           <!-- <div style="display:flex;flex-wrap:wrap;flex-flow: column;padding-left: 15px; "> 
+                <div style="margin-left:auto;margin-right: auto;margin-top: 0px;"> Alert </div> 
+                <p style="margin-top: 3px">fdfdd;;;;;d</p> 
+            
+            </div>  -->
+
             <div class="plan hoverItem" id="li1" onclick ="see_list(this)" > 
               
                <p style="font-size:15px; text-align: center;">BREAKFAST</p> 
     
                <div class= "tri2"> 
-               <p >ITEMs: <ins id="num_item" >0</ins></p> 
-               <p >CALORIES: <ins id="calo" >0</ins></p> 
+                <p >ITEMs: <ins id="num_item" >0</ins></p> 
+               <p >CALORIES: <ins id="calo" >0</ins> gcal</p> 
                </div> 
             </div>
             <div class ="plan hoverItem" id ="li2" onclick ="see_list(this)" > 
@@ -690,7 +698,7 @@
                <p style="font-size:15px; text-align: center;" >LUNCH</p> 
                <div class= "tri2"> 
                 <p >ITEMs: <ins id="num_item" >0</ins></p> 
-                <p >CALORIES: <ins id="calo" >0</ins></p> 
+                <p >CALORIES: <ins id="calo" >0</ins> gcal</p> 
                 </div> 
             
             </div>
@@ -699,7 +707,7 @@
                
                 <div class= "tri2"> 
                     <p >ITEMs: <ins id="num_item" >0</ins></p> 
-                    <p >CALORIES: <ins id="calo" >0</ins></p> 
+                    <p >CALORIES: <ins id="calo" >0</ins> gcal</p> 
                  </div> 
             </div>
          </div>    
