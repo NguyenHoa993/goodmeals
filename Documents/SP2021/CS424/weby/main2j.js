@@ -716,8 +716,8 @@ function displayHint(){
 function displayInformation(inputInfo){
     document.getElementById("USERname").innerHTML = inputInfo.username;
     document.getElementById("USERage").innerHTML = "Age: " + inputInfo.age;
-    document.getElementById("USERheight").innerHTML = "Height: " + inputInfo.height;
-    document.getElementById("USERweight").innerHTML = "Weight: " + inputInfo.weight;
+    document.getElementById("USERheight").innerHTML = "Height: " + inputInfo.height + "  in.";
+    document.getElementById("USERweight").innerHTML = "Weight: " + inputInfo.weight + "  lbs";
     document.getElementById("USERfitnessgoal").innerHTML = "Fitness Goal: " + inputInfo.fitnessGoal;
     var isVegan = "yes";
     if(inputInfo.vegan == "false")
@@ -726,7 +726,7 @@ function displayInformation(inputInfo){
 
     dailyIntake = new DailyIntake();
     dailyIntake.calculate(userInfo);
-    document.getElementById("USERcalories").innerHTML = "Calories: " + dailyIntake.calo;
+    document.getElementById("USERcalories").innerHTML = "Calories: " + dailyIntake.calo + " calories";
     document.getElementById("USERvitamin").innerHTML = "Vitamins: " + dailyIntake.vitamin + " mg";
     document.getElementById("USERsodium").innerHTML = "Sodium: " + dailyIntake.sodium + " g";
     document.getElementById("USERfat").innerHTML = "Fat: " + dailyIntake.fat + " g";
