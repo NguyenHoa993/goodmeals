@@ -117,7 +117,8 @@ div.one_item img{
     border:1px solid orange;
     justify-content: space-evenly;
     
-    
+    overflow:scroll;
+    height: 600px;
 }
 
 .item_box{
@@ -249,6 +250,9 @@ nav .bb:hover{
 .search-container button:hover {
     background: #ccc;
   }
+button:hover{
+    cursor: pointer;
+}
 
 
 #popup_collection #collection{
@@ -266,9 +270,11 @@ nav .bb:hover{
 #popup_option_list div:hover{
     margin-top:10px;
     height:20%; 
+   
     border: 1px solid orange;
     box-shadow: 0 3px 5px 1px rgba(0,0,0,0.15);
     transform: translateY(-0.25em);
+    
     
  }
 #popup_option_list div p{
@@ -492,4 +498,18 @@ th {
 
   .hoverItem:hover {
       background-color: rgb(90, 248, 138);
+      cursor:pointer;
   }
+
+/*
+.blur_dark {
+    
+
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4); 
+      
+}
+.no_blur_dark{
+    -webkit-filter: none;
+    filter: none;
+} */  

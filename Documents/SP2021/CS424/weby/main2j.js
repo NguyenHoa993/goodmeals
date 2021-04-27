@@ -46,7 +46,10 @@ function go_add(ev){
     
   food = document.querySelector("#"+true_id);
   food.style.borderColor = "red";
-  
+
+  var name  =food.firstElementChild.nextElementSibling
+ document.querySelector("#what_food").textContent  = name.textContent; 
+
   var op_list = document.querySelector("#popup_option_list");
   op_list.style.visibility ="visible"; 
 
@@ -57,8 +60,14 @@ function go_add(ev){
     
   op_list.classList.add("show"); 
  
+  sec_head = document.querySelector(".sec_head");
+    
+  sec_head.style.pointerEvents ="none";
+  op_list.style.pointerEvents ="initial";
+  
 
 }
+
 
 
 
@@ -90,6 +99,11 @@ function see_list(ev){
  
     outer_collection.style.visibility ="visible";
     outer_collection.classList.add("show");
+
+    sec_head = document.querySelector(".sec_head");
+    
+    sec_head.style.pointerEvents ="none";
+    outer_collection.style.pointerEvents ="initial";
   
    
 } 
@@ -251,6 +265,11 @@ function to_list(ev){
     // mark the day as planned
    currSelectedDay.style.backgroundColor = "aqua";
    plannedDays.push(currPlannedDay);
+   
+   
+    
+   sec_head.style.pointerEvents ="initial";
+  
 }
 
 function updateAMeal(li_id){
@@ -394,6 +413,8 @@ function go_delete(ev){
     var a  = document.querySelector("#popup_"+true_id);
     a.style.visibility ="hidden";
     a.classList.remove("show"); 
+    sec_head = document.querySelector(".sec_head");
+     sec_head.style.pointerEvents ="unset";
 }; 
 
 
@@ -439,13 +460,20 @@ function go_detail(ev){
 
      
     }
+
+    sec_head = document.querySelector(".sec_head");
     
+    sec_head.style.pointerEvents ="none";
+    pop.style.pointerEvents ="initial";
+    sec_head.classList.add("blur_dark");
+
 }
 
 document.querySelector("#meat_item").style.visibility ="visible";
 
 var current_tab = null; 
 current_tab = "meat";
+
 function bring_list(ev){
     var id = ev.id;
     var  l  = ["meat","vegi","soup"];
@@ -464,6 +492,9 @@ function bring_list(ev){
         }
     });
     document.querySelector("#type_title").textContent = kui[1].toUpperCase();
+
+ 
+
     
 }
 
@@ -488,7 +519,7 @@ window.onload = function(){
     thisMonth = today.getMonth() + 1;
     thisYear = today.getFullYear();
     thisDay = today.getDate();
-
+    
     // create calendar with the 
     createCalendar(elem, thisYear, thisMonth);
 
@@ -520,6 +551,7 @@ window.onload = function(){
     dailyIntake = new DailyIntake();
     dailyIntake.calculate(userInfo);
     console.log(dailyIntake);
+    updateCap();
 
     
 }
@@ -731,6 +763,16 @@ function displayInformation(inputInfo){
     document.getElementById("USERsodium").innerHTML = "Sodium: " + dailyIntake.sodium + " g";
     document.getElementById("USERfat").innerHTML = "Fat: " + dailyIntake.fat + " g";
     document.getElementById("USERprotein").innerHTML = "Protein: " + dailyIntake.protein + " g";
+    updateCap()
+}
+
+
+function updateCap(){
+    document.querySelector(".cap_calo").innerHTML  = dailyIntake.calo;
+    document.querySelector(".cap_protein").innerHTML  = dailyIntake.protein;
+    document.querySelector(".cap_fat").innerHTML   =  dailyIntake.fat;
+    document.querySelector(".cap_vitamin").innerHTML   =  dailyIntake.vitamin; 
+    document.querySelector(".cap_sodium").innerHTML   =  dailyIntake.sodium; 
 }
 
 //--LUKE NORRIS' CODE ENDS HERE
