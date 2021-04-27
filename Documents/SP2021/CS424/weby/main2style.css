@@ -15,7 +15,7 @@ section{
     height:750px;
     border:1px solid orange;
     margin-right:10px;
-    background-color: #ffc830;
+
 
 }
 
@@ -48,7 +48,7 @@ p#type_title{
     border:  1px solid orange;
     justify-self: center;
     margin-top:10px;
-    background-color: white;
+    /* background-color: white; */
     
 }
 .one_item p{
@@ -117,7 +117,7 @@ div.one_item img{
     flex-wrap:wrap;
     border:1px solid orange;
     justify-content: space-evenly;
-    background-color: #ffc830;
+    /* background-color: #ffc830; */
     
     overflow:scroll;
     height: 600px;
