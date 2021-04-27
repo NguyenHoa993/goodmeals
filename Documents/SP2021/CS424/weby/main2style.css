@@ -15,7 +15,8 @@ section{
     height:750px;
     border:1px solid orange;
     margin-right:10px;
-    
+    background-color: #ffc830;
+
 }
 
 .center_user .informationPanel p{
@@ -47,7 +48,7 @@ p#type_title{
     border:  1px solid orange;
     justify-self: center;
     margin-top:10px;
-   
+    background-color: white;
     
 }
 .one_item p{
@@ -116,6 +117,7 @@ div.one_item img{
     flex-wrap:wrap;
     border:1px solid orange;
     justify-content: space-evenly;
+    background-color: #ffc830;
     
     overflow:scroll;
     height: 600px;
@@ -504,7 +506,6 @@ th {
 /*
 .blur_dark {
     
-
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4); 
       
