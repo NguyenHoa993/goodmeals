@@ -440,6 +440,12 @@ function go_detail(ev){
         }
     }
 
+    var fooddict = new foodDict();
+    var link = fooddict.links[true_id];
+    function seeRecipe(){
+        window.open(link, "_blank");
+    }
+
     if(!isAdded) {
         // attempt to add button "How to cook" to detail window
         var recipeBtn = document.createElement("button");
@@ -448,6 +454,7 @@ function go_detail(ev){
         recipeBtn.style.float = "left";
         recipeBtn.style.margin = "10px";
         recipeBtn.classList.add("hoverItem");
+        recipeBtn.addEventListener("click", seeRecipe);
         // append "how to cook" button to the popup
         pop.appendChild(recipeBtn);
     }

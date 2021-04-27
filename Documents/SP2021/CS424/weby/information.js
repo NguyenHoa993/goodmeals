@@ -50,3 +50,24 @@ function editInformation(){
     // display edited information and intake
     displayInformation(userInfo);
 }
+
+class foodDict {
+    constructor(){
+        this.links = {
+            "chick1" : "https://food.ndtv.com/lists/10-best-chicken-fillet-recipes-1653455",
+            "chick2" : "https://www.allrecipes.com/recipe/8597/quick-and-easy-mexican-chicken/",
+            "beef1" : "https://www.tasteofhome.com/article/how-to-cook-medium-rare-steak/",
+            "beef2" : "https://appetiteforchina.com/recipes/red-cooked-beef",
+            "chick3" : "https://therecipecritic.com/easy-beef-teriyaki/",
+            "green1" : "https://thesaltymarshmallow.com/amazing-olive-pasta-salad/",
+            "green2" : "https://www.today.com/recipes/penne-spinach-parmesan-seasoned-breadcrumbs-recipe-t176019",
+            "green3" : "https://www.recipegirl.com/avocado-pine-nut-salad/",
+            "green4" : "https://www.spendwithpennies.com/classic-chicken-salad-recipe/",
+            "soup1" : "https://www.allrecipes.com/recipe/13841/creamy-cheddar-cheese-soup/",
+            "soup2" : "https://www.allrecipes.com/recipe/13841/creamy-cheddar-cheese-soup/",
+            "soup3" : "https://www.tasteofhome.com/recipes/the-ultimate-chicken-noodle-soup/",
+            "soup4" :  "https://www.finecooking.com/recipe/classic-tomato-soup"
+            };
+    }
+    
+};
