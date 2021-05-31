@@ -1,1 +1,1 @@
-# GR4_group17
+Good Meals is a website that allows you to explore healthy eating habits. You can check the nutrition needed for the day based on the information you enter when registering, and plan your meals accordingly. The website also helps you find the recipe for whichever meal you select. For planning your meals you can add a meal to breakfast, lunch, or dinner and assign the meal to a specific day. If your mind changes you can add or remove the meals however you want. The site also provides articles on healthy eating so you can learn more about having a healthy diet
