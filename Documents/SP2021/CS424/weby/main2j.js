@@ -166,7 +166,7 @@ function put_to_list(selector,item ){
             removeAMeal(food_id,cur_li_id);
         }
        
-        
+        alertCheck();
     });
     
   /*
@@ -256,11 +256,15 @@ function to_list(ev){
     day_list_count.textContent = store_list["li1"].length + store_list["li2"].length +store_list["li3"].length;
 
 
+    
    
     updateAMeal(li_id);
     var op_list = document.querySelector("#popup_option_list");
     op_list.style.visibility  = "hidden"; 
-    op_list.classList.remove("show");
+    //op_list.classList.remove("show");
+
+    alertCheck();
+
      
     // mark the day as planned
    currSelectedDay.style.backgroundColor = "aqua";
@@ -271,6 +275,10 @@ function to_list(ev){
    sec_head.style.pointerEvents ="initial";
   
 }
+
+
+
+
 
 function updateAMeal(li_id){
     var list_count  = document.querySelector("#"+li_id +" "+"#num_item");
@@ -350,6 +358,7 @@ function triggerNewDay(uni_key){
         arrDay.push(selectDay); 
         selectIndex = arrDay.length -1; 
     }
+
     updateList(selectDay);  
 }
 
@@ -370,6 +379,9 @@ function updateList(selectDay){
     updateSelectorID("li1",selectDay.breakfast.foodList);
     updateSelectorID("li2",selectDay.lunch.foodList );
     updateSelectorID("li3",selectDay.dinner.foodList );
+
+    console.log("updateList"+selectDay.dinner.foodList);
+    
 
     var total_items =  selectDay.breakfast.items  +  selectDay.lunch.items  +  selectDay.dinner.items ;
     var total_calo =  selectDay.breakfast.calo  +  selectDay.lunch.calo  +  selectDay.dinner.calo ;
@@ -440,12 +452,6 @@ function go_detail(ev){
         }
     }
 
-    var fooddict = new foodDict();
-    var link = fooddict.links[true_id];
-    function seeRecipe(){
-        window.open(link, "_blank");
-    }
-
     if(!isAdded) {
         // attempt to add button "How to cook" to detail window
         var recipeBtn = document.createElement("button");
@@ -454,7 +460,6 @@ function go_detail(ev){
         recipeBtn.style.float = "left";
         recipeBtn.style.margin = "10px";
         recipeBtn.classList.add("hoverItem");
-        recipeBtn.addEventListener("click", seeRecipe);
         // append "how to cook" button to the popup
         pop.appendChild(recipeBtn);
     }
@@ -755,8 +760,8 @@ function displayHint(){
 function displayInformation(inputInfo){
     document.getElementById("USERname").innerHTML = inputInfo.username;
     document.getElementById("USERage").innerHTML = "Age: " + inputInfo.age;
-    document.getElementById("USERheight").innerHTML = "Height: " + inputInfo.height + "  in.";
-    document.getElementById("USERweight").innerHTML = "Weight: " + inputInfo.weight + "  lbs";
+    document.getElementById("USERheight").innerHTML = "Height: " + inputInfo.height;
+    document.getElementById("USERweight").innerHTML = "Weight: " + inputInfo.weight;
     document.getElementById("USERfitnessgoal").innerHTML = "Fitness Goal: " + inputInfo.fitnessGoal;
     var isVegan = "yes";
     if(inputInfo.vegan == "false")
@@ -765,22 +770,122 @@ function displayInformation(inputInfo){
 
     dailyIntake = new DailyIntake();
     dailyIntake.calculate(userInfo);
-    document.getElementById("USERcalories").innerHTML = "Calories: " + dailyIntake.calo + " calories";
+    document.getElementById("USERcalories").innerHTML = "Calories: " + dailyIntake.calo;
     document.getElementById("USERvitamin").innerHTML = "Vitamins: " + dailyIntake.vitamin + " mg";
     document.getElementById("USERsodium").innerHTML = "Sodium: " + dailyIntake.sodium + " g";
     document.getElementById("USERfat").innerHTML = "Fat: " + dailyIntake.fat + " g";
     document.getElementById("USERprotein").innerHTML = "Protein: " + dailyIntake.protein + " g";
-    updateCap()
+    updateCap();
 }
+
+
+
+
 
 
 function updateCap(){
-    document.querySelector(".cap_calo").innerHTML  = dailyIntake.calo;
-    document.querySelector(".cap_protein").innerHTML  = dailyIntake.protein;
-    document.querySelector(".cap_fat").innerHTML   =  dailyIntake.fat;
-    document.querySelector(".cap_vitamin").innerHTML   =  dailyIntake.vitamin; 
-    document.querySelector(".cap_sodium").innerHTML   =  dailyIntake.sodium; 
+    document.querySelector(".cap_calo").textContent  = dailyIntake.calo;
+    document.querySelector(".cap_protein").textContent  = dailyIntake.protein;
+    document.querySelector(".cap_fat").textContent   =  dailyIntake.fat;
+    document.querySelector(".cap_vitamin").textContent   =  dailyIntake.vitamin; 
+    document.querySelector(".cap_sodium").textContent   =  dailyIntake.sodium; 
 }
+
+//dss
+
+var alert_box = document.querySelector("#alert_nutri");	
+
+function alertCheck(){
+
+    var near_notice  = []
+    var exceed_notice=  []
+    var nutrition = ["protein","fat","sodium","vitamin"];
+    nutrition.forEach(function(x,i){
+        var day_nutri = parseFloat(document.querySelector(".plan_day"+" #"+ x).textContent); 
+        var cap_nutri =  parseFloat(document.querySelector(".cap_"+x ).textContent);  
+        if( day_nutri >= 0.75*cap_nutri){
+            if(day_nutri <= cap_nutri ){
+                near_notice.push(x);  
+            }
+            else{exceed_notice.push(x);}
+        }
+    }); 
+
+    
+  
+    
+
+    
+    deleteAll(alert_box);
+
+
+
+    var da_calo = parseFloat(document.querySelector(".plan_day #calo").textContent); 
+    var cap_calo =  parseFloat(document.querySelector(".cap_calo").textContent); 
+    
+    if(da_calo >= 0.75* cap_calo){
+        var warn = document.createElement("div");  // don't do document.createElement("p")  or [ document.createTextNode("p") -> not work  alert_box.childNodes[0].style. ]
+        if(da_calo <= cap_calo){
+            warn.textContent = "Calories is nearly exceed"; 
+            warn.style.color =  "#e68a00"; 
+            alert_box.appendChild(warn);
+        }
+        else {
+            warn.textContent  = "Calories is exceeding Cap";
+            warn.style.color = "#ff4d4d"; 
+            //alert_box.appendChild(document.createTextNode("Calories is exceeding Cap"));
+            alert_box.appendChild(warn);
+        }
+        alert_box.childNodes[0].style.fontSize= "19px";
+    
+               
+
+    }    
+
+
+  
+
+    near_notice.forEach(function(x,i){
+       
+        var div = document.createElement("div"); 
+        var xu = x.split(""); 
+        xu[0] = xu[0].toUpperCase();
+        var xu1 = xu.toString();
+        var xu2 = xu1.replace(/[, ]+/g,"");
+        
+
+        div.innerHTML = xu2+" is nearly exceed"; 
+     
+        div.style.color = "#e68a00";
+        
+     
+        alert_box.appendChild(div);
+    }); 
+    
+    exceed_notice.forEach(function(x,i){
+        var div = document.createElement("div"); 
+        var xu = x.split(""); 
+        xu[0] = xu[0].toUpperCase();
+        var xu1 = xu.toString();
+        var xu2 = xu1.replace(/[, ]+/g,"");
+
+
+
+        div.innerHTML = xu2+" is exceeding Cap"; 
+        div.style.color = "#ff4d4d"; 
+        // not worked var t = document.createTextNode(x+" is  exceeding Cap "); 
+       
+        alert_box.appendChild(div);
+        //   alert_box.appendChild(t);
+    }); 
+  
+}
+
+
+
+
+
+
 
 //--LUKE NORRIS' CODE ENDS HERE
 
@@ -809,6 +914,7 @@ function onDayClick(){
     this.style.outlineColor = "red";
     
     triggerNewDay(unique_key)
+    alertCheck();
 
     // change the label of the date in plan
     $("#planDate").text(date.getDate());
@@ -878,6 +984,11 @@ click_healthy2.addEventListener("click",function(){
     healthy1_div.style.display ="none";
     healthy2_div.style.display ="block";
 }); 
+
+
+
+
+
 
 
 

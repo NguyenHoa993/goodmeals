@@ -277,7 +277,7 @@
     
                 <div content="outer" id="popup_chick2"> 
                     <img src = "image_v1/chick2.jpeg" ></img>
-                    <p >Chicken fille</p> 
+                    <p >Chicken Mexico</p> 
                     <p>Boil  the chick </p>
                     <button id = "cancel_chick2" onclick="go_delete(this)" >CANCEL</button>
                 </div>
@@ -360,10 +360,11 @@
                     <div id="3" class="hoverItem" onclick ="to_list(this)"><p>DINNER</p></div>
                     <button id = "cancel_option_list" onclick="go_delete(this)" >CANCEL</button>
                 </div>
+
                 <div content= "outer" id ="popup_collection">
                     <div id = "collection"> </div>
                     <p id="noFoodMessage" style="display: none;">There is no food added to the list</p>
-                    <button id = "cancel_collection" onclick="go_delete(this)" >CANCEL</button>
+                    <div style="width:100%; display: flex;"> <button id = "cancel_collection"  onclick="go_delete(this)" >CANCEL</button> </div>
                 </div>
             </div>
     
@@ -664,7 +665,7 @@
             </div>
     
             <!-- *************END CALENDAR******************* -->
-            <div class="plan_day" > 
+            <div class="plan_day"> 
                 <div class= "tri2">
                     <p >PROTEIN <ins id ="protein">0</ins> / <ins class ="cap_protein">0</ins> g</p>
                     <p  >SODIUM <ins id="sodium">0</ins> / <ins class ="cap_sodium">0</ins> g</p>
@@ -678,11 +679,18 @@
                 
             </div>
 
-           <!-- <div style="display:flex;flex-wrap:wrap;flex-flow: column;padding-left: 15px; "> 
-                <div style="margin-left:auto;margin-right: auto;margin-top: 0px;"> Alert </div> 
-                <p style="margin-top: 3px">fdfdd;;;;;d</p> 
+            <div style="display:flex; flex-flow: column;  padding-left: 15px; "> 
+                <div style="margin-left:auto;margin-right: auto;margin-top: 10px;background-color:#ff9966"> ALERT </div> 
+                
+                <div id ="alert_nutri">
+                    
+                   <!--    <p  id="near" style= "visibility: hidden; position:absolute">fdfdd;;;;;d</p>    -->
+                
             
-            </div>  -->
+                    
+                </div>
+                
+            </div>  
 
             <div class="plan hoverItem" id="li1" onclick ="see_list(this)" > 
               
